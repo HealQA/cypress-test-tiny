@@ -1,39 +1,8 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create the custom command: 'login'.
-//
-// The commands.js file is a great place to
-// modify existing commands and create custom
-// commands for use throughout your tests.
-//
-// You can read more about custom commands here:
-// https://on.cypress.io/api/commands
-// ***********************************************
-//
-// Cypress.Commands.add("login", function(email, password){
-//   var email    = email || "joe@example.com"
-//   var password = password || "foobar"
-//
-//   var log = Cypress.Log.command({
-//     name: "login",
-//     message: [email, password],
-//     consoleProps: function(){
-//       return {
-//         email: email,
-//         password: password
-//       }
-//     }
-//   })
-//
-//   cy
-//     .visit("/login", {log: false})
-//     .contains("Log In", {log: false})
-//     .get("#email", {log: false}).type(email, {log: false})
-//     .get("#password", {log: false}).type(password, {log: false})
-//     .get("button", {log: false}).click({log: false}) //this should submit the form
-//     .get("h1", {log: false}).contains("Dashboard", {log: false}) //we should be on the dashboard now
-//     .url({log: false}).should("match", /dashboard/, {log: false})
-//     .then(function(){
-//       log.snapshot().end()
-//     })
-// })
+Cypress.Commands.add("login", (username, password) => {
+    cy.visit('https://my.qa.heal.com/login');
+    cy.get('.fade-enter-done').get('[data-tid="txt_title"]').should('have.text','Log in');
+    cy.get('.fade-enter-done').get('[data-tid="inp_username"]').should('be.visible').type(username);
+    cy.get('.fade-enter-done').get('[data-tid="inp_password"]').should('be.visible').type(password);
+    cy.get('.fade-enter-done').get('[data-tid="btn_pageBottom_enabled"]').should('be.visible').click();
+})
+
